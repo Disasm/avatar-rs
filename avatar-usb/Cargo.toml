@@ -6,3 +6,7 @@ edition = "2018"
 
 [dependencies]
 usb-device = "0.2.5"
+libusb = { version = "0.3.0", optional = true }
+
+[features]
+std = ["libusb"]
