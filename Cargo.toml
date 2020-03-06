@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "avatar-cli",
     "avatar-common",
     "avatar-probe-rs",
     "avatar-stm32f103c8",

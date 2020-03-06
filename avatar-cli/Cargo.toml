@@ -1,0 +1,9 @@
+[package]
+name = "avatar-cli"
+version = "0.1.0"
+authors = ["Vadim Kaushan <admin@disasm.info>"]
+edition = "2018"
+
+[dependencies]
+avatar-probe-rs = { path = "../avatar-probe-rs" }
+avatar-common = { path = "../avatar-common" }
