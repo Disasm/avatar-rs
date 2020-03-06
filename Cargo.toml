@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "avatar-stm32f103c8",
+    "avatar-usb",
+]
