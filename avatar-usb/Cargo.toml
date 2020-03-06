@@ -1,0 +1,8 @@
+[package]
+name = "avatar-usb"
+version = "0.1.0"
+authors = ["disasm"]
+edition = "2018"
+
+[dependencies]
+usb-device = "0.2.5"
