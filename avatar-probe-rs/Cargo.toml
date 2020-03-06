@@ -1,0 +1,9 @@
+[package]
+name = "avatar-probe-rs"
+version = "0.1.0"
+authors = ["Vadim Kaushan <admin@disasm.info>"]
+edition = "2018"
+
+[dependencies]
+probe-rs = "0.5.0"
+avatar-common = { path = "../avatar-common" }

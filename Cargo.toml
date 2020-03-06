@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "avatar-common",
+    "avatar-probe-rs",
     "avatar-stm32f103c8",
     "avatar-usb",
 ]
