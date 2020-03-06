@@ -1,0 +1,15 @@
+[package]
+name = "avatar-stm32f103c8"
+version = "0.1.0"
+authors = ["Vadim Kaushan <admin@disasm.info>"]
+edition = "2018"
+
+[dependencies]
+cortex-m = "0.6.1"
+cortex-m-rt = "0.6.10"
+stm32f1xx-hal = { version = "0.5.0", features = ["rt", "stm32-usbd", "stm32f103"] }
+embedded-hal = "0.2.3"
+panic-semihosting = "0.5.3"
+usb-device = "0.2.3"
+avatar-usb = { path = "../avatar-usb", default-features = false }
+stm32-device-signature = { version = "0.3.0", features = ["stm32f1"] }
