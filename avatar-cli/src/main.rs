@@ -10,6 +10,6 @@ fn main() {
         }
     };
 
-    let v = interface.read32(0xE004_2000).unwrap();
+    let v = interface.try_read32(0xE004_2000).unwrap();
     println!("Value: {:08x}", v);
 }

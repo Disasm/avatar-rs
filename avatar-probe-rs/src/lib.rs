@@ -1,8 +1,8 @@
-use avatar_common::MemoryInterface;
+use avatar_common::{MemoryInterface, ImplementInfallible};
 use probe_rs::{Probe, Error, Session, Memory};
 
 pub struct AvatarProbe {
-    session: Session,
+    _session: Session,
     memory: Memory,
 }
 
@@ -22,7 +22,7 @@ impl AvatarProbe {
         let session: Session = probe.attach("stm32f401")?;
         let memory = session.attach_to_memory(0)?;
         Ok(Self{
-            session,
+            _session: session,
             memory
         })
     }
@@ -31,11 +31,11 @@ impl AvatarProbe {
 impl MemoryInterface for AvatarProbe {
     type Error = Error;
 
-    fn read8(&mut self, address: u32) -> Result<u8, Error> {
+    fn try_read8(&mut self, address: u32) -> Result<u8, Error> {
         self.memory.read8(address)
     }
 
-    fn read16(&mut self, address: u32) -> Result<u16, Error> {
+    fn try_read16(&mut self, address: u32) -> Result<u16, Error> {
         // TODO: fix this
 
         let value: u32 = self.memory.read32(address & !0b11)?;
@@ -48,15 +48,15 @@ impl MemoryInterface for AvatarProbe {
         Ok(value16)
     }
 
-    fn read32(&mut self, address: u32) -> Result<u32, Error> {
+    fn try_read32(&mut self, address: u32) -> Result<u32, Error> {
         self.memory.read32(address)
     }
 
-    fn write8(&mut self, address: u32, value: u8) -> Result<(), Error> {
+    fn try_write8(&mut self, address: u32, value: u8) -> Result<(), Error> {
         self.memory.write8(address, value)
     }
 
-    fn write16(&mut self, address: u32, value: u16) -> Result<(), Error> {
+    fn try_write16(&mut self, address: u32, value: u16) -> Result<(), Error> {
         // TODO: fix this
 
         let old_value: u32 = self.memory.read32(address & !0b11)?;
@@ -68,7 +68,9 @@ impl MemoryInterface for AvatarProbe {
         self.memory.write32(address & !0b11, new_value)
     }
 
-    fn write32(&mut self, address: u32, value: u32) -> Result<(), Error> {
+    fn try_write32(&mut self, address: u32, value: u32) -> Result<(), Error> {
         self.memory.write32(address, value)
     }
 }
+
+impl ImplementInfallible for AvatarProbe {}
