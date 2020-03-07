@@ -5,4 +5,8 @@ members = [
     "avatar-probe-rs",
     "avatar-stm32f103c8",
     "avatar-usb",
+    "vcell",
 ]
+
+[patch.crates-io]
+vcell = { path = "vcell" }

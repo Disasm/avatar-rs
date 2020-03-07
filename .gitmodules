@@ -1,0 +1,3 @@
+[submodule "vcell"]
+	path = vcell
+	url = https://github.com/Disasm/vcell.git
