@@ -1,3 +1,6 @@
 [submodule "vcell"]
 	path = vcell
 	url = https://github.com/Disasm/vcell.git
+[submodule "stm32-rs"]
+	path = stm32-rs
+	url = https://github.com/stm32-rs/stm32-rs.git
