@@ -10,6 +10,9 @@ fn main() {
         }
     };
 
-    let v = interface.try_read32(0xE004_2000).unwrap();
-    println!("Value: {:08x}", v);
+    let mut v = interface.try_read32(0xE004_2000).unwrap();
+    if v == 0 {
+        v = interface.try_read32(0x40015800).unwrap();
+    }
+    println!("IDCODE: {:08x}", v);
 }
