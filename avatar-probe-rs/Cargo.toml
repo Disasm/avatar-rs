@@ -6,4 +6,4 @@ edition = "2018"
 
 [dependencies]
 probe-rs = "0.5.0"
-avatar-common = { path = "../avatar-common" }
+avatar-common = { path = "../avatar-common", features = ["std"] }

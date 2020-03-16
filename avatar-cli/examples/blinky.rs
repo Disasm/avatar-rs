@@ -1,7 +1,6 @@
 // Target board: NUCLEO-F042K6
 
-use avatar_probe_rs::AvatarProbe;
-use avatar_common::StaticMemoryInterface;
+use avatar_probe_rs::open_probe;
 use stm32f0xx_hal::prelude::*;
 use stm32f0xx_hal::stm32;
 use std::time::Duration;
@@ -21,25 +20,7 @@ mod interrupt {
 }
 
 fn main() {
-    let interface = match AvatarProbe::open_any() {
-        Ok(probe) => probe,
-        Err(e) => {
-            println!("Can't open probe: {:?}", e);
-            return;
-        }
-    };
-
-    let interface = Box::new(interface);
-
-    static mut INTERFACE: Option<StaticMemoryInterface> = None;
-
-    unsafe {
-        INTERFACE.replace(StaticMemoryInterface {
-            inner: interface
-        });
-    }
-
-    let interface = unsafe { &mut INTERFACE }.as_mut().unwrap();
+    let interface = open_probe();
     vcell::set_memory_interface(interface);
 
     println!("Staring blinkey!");

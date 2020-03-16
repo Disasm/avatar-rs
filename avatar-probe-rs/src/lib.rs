@@ -1,5 +1,6 @@
-use avatar_common::{MemoryInterface, ImplementInfallible};
+use avatar_common::{MemoryInterface, ImplementInfallible, StaticMemoryInterface};
 use probe_rs::{Probe, Error, Session, Memory};
+use std::sync::atomic::{AtomicBool, Ordering};
 
 pub struct AvatarProbe {
     _session: Session,
@@ -74,3 +75,31 @@ impl MemoryInterface for AvatarProbe {
 }
 
 impl ImplementInfallible for AvatarProbe {}
+
+
+pub fn open_probe() -> &'static mut StaticMemoryInterface {
+    static TAKEN: AtomicBool = AtomicBool::new(false);
+
+    if TAKEN.compare_and_swap(false, true, Ordering::SeqCst) {
+        panic!("Probe is already opened");
+    }
+
+    let interface = match AvatarProbe::open_any() {
+        Ok(probe) => probe,
+        Err(e) => {
+            panic!("Can't open probe: {:?}", e);
+        }
+    };
+
+    let interface = Box::new(interface);
+
+    static mut INTERFACE: Option<StaticMemoryInterface> = None;
+
+    unsafe {
+        INTERFACE.replace(StaticMemoryInterface {
+            inner: interface
+        });
+    }
+
+    unsafe { &mut INTERFACE }.as_mut().unwrap()
+}
