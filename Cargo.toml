@@ -6,9 +6,11 @@ members = [
     "avatar-stm32f103c8",
     "avatar-usb",
     "stm32-rs/stm32f0",
+    "stm32f0xx-hal",
     "vcell",
 ]
 
 [patch.crates-io]
 vcell = { path = "vcell" }
 stm32f0 = { path = "stm32-rs/stm32f0" }
+stm32f0xx-hal = { path = "stm32f0xx-hal" }

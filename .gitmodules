@@ -4,3 +4,7 @@
 [submodule "stm32-rs"]
 	path = stm32-rs
 	url = https://github.com/stm32-rs/stm32-rs.git
+[submodule "stm32f0xx-hal"]
+	path = stm32f0xx-hal
+	url = https://github.com/Disasm/stm32f0xx-hal.git
+	branch = avatar
