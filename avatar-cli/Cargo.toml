@@ -12,3 +12,5 @@ avatar-common = { path = "../avatar-common", features = ["std"] }
 stm32f0xx-hal = { version = "0.16.0", features = ["stm32f042"] }
 cortex-m = ">=0.5.8,<0.7"
 vcell = "0.1.2"
+bme280 = "0.2.1"
+linux-embedded-hal = "0.3.0"
