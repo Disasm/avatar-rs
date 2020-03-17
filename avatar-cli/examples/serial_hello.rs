@@ -1,4 +1,6 @@
 // Target board: NUCLEO-F042K6
+//
+// Serial is connected to the on-board ST-LINK
 
 use avatar_probe_rs::open_probe;
 use stm32f0xx_hal::prelude::*;
