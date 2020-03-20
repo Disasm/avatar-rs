@@ -21,6 +21,12 @@ impl AvatarProbe {
 
     pub fn open(probe: Probe) -> Result<Self, Error> {
         let session: Session = probe.attach("stm32f401")?;
+
+        // Select a core.
+        let core = session.attach_to_core(0)?;
+        // Reset and halt the attached core.
+        core.reset_and_halt()?;
+
         let memory = session.attach_to_memory(0)?;
         Ok(Self{
             _session: session,
