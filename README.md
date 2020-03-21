@@ -23,3 +23,30 @@ See also [`serial_hello`] and [`i2c_bme280`] examples.
 [NUCLEO-F042K6]: https://www.st.com/en/evaluation-tools/nucleo-f042k6.html
 [`serial_hello`]: https://github.com/Disasm/avatar-rs/blob/master/avatar-cli/examples/serial_hello.rs
 [`i2c_bme280`]: https://github.com/Disasm/avatar-rs/blob/master/avatar-cli/examples/i2c_bme280.rs
+
+
+## Porting to the different families
+
+Peripheral access crates don't require any changes if generated with svd2rust 0.16.1
+
+HAL crates require changes if they use the following constructions.
+
+### `volatile_read`/`volatile_write`
+
+All the volatile memory accesses should be replaced with calls to the `VolatileCell` methods.
+
+For example,
+
+    unsafe { ptr::read_volatile(&self.spi.dr as *const _ as *const u8) }
+
+should be replaced with
+
+    unsafe { (*(&self.spi.dr as *const _ as *const vcell::VolatileCell<u8>)).get() }
+
+and
+
+    unsafe { ptr::write_volatile(&self.spi.dr as *const _ as *mut u8, byte) }
+
+should be replaced with
+
+    unsafe { (*(&self.spi.dr as *const _ as *const vcell::VolatileCell<u8>)).set(byte) }
