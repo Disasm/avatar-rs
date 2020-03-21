@@ -2,10 +2,6 @@
 	path = vcell
 	url = https://github.com/Disasm/vcell.git
 	branch = avatar
-[submodule "stm32-rs"]
-	path = stm32-rs
-	url = https://github.com/Disasm/stm32-rs.git
-	branch = avatar
 [submodule "stm32f0xx-hal"]
 	path = stm32f0xx-hal
 	url = https://github.com/Disasm/stm32f0xx-hal.git
