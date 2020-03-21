@@ -62,6 +62,51 @@ pub struct StaticMemoryInterface {
     pub inner: &'static mut dyn InfallibleMemoryInterface,
 }
 
+impl StaticMemoryInterface {
+    pub fn read<T: Sized>(&mut self, address: u32) -> T {
+        let size = core::mem::size_of::<T>();
+        match size {
+            1 => unsafe {
+                let value = self.read8(address);
+                let ptr = &value as *const u8 as *const T;
+                ptr.read()
+            },
+            2 => unsafe {
+                let value = self.read16(address);
+                let ptr = &value as *const u16 as *const T;
+                ptr.read()
+            },
+            4 => unsafe {
+                let value = self.read32(address);
+                let ptr = &value as *const u32 as *const T;
+                ptr.read()
+            },
+            _ => unimplemented!("storage type is not supported")
+        }
+    }
+
+    pub fn write<T: Sized>(&mut self, address: u32, value: T) {
+        let size = core::mem::size_of_val(&value);
+
+        let ptr = &value as *const T as *const ();
+        match size {
+            1 => unsafe {
+                let value = (ptr as *const u8).read();
+                self.write8(address, value)
+            },
+            2 => unsafe {
+                let value = (ptr as *const u16).read();
+                self.write16(address, value)
+            },
+            4 => unsafe {
+                let value = (ptr as *const u32).read();
+                self.write32(address, value)
+            },
+            _ => unimplemented!("storage type is not supported")
+        }
+    }
+}
+
 impl Deref for StaticMemoryInterface {
     type Target = dyn InfallibleMemoryInterface;
 
