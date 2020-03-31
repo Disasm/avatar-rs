@@ -59,6 +59,10 @@ impl MemoryInterface for AvatarProbe {
         self.memory.read32(address)
     }
 
+    fn try_read_block32(&mut self, address: u32, data: &mut [u32]) -> Result<(), Error> {
+        self.memory.read_block32(address, data)
+    }
+
     fn try_write8(&mut self, address: u32, value: u8) -> Result<(), Error> {
         self.memory.write8(address, value)
     }
@@ -77,6 +81,10 @@ impl MemoryInterface for AvatarProbe {
 
     fn try_write32(&mut self, address: u32, value: u32) -> Result<(), Error> {
         self.memory.write32(address, value)
+    }
+
+    fn try_write_block32(&mut self, address: u32, data: &[u32]) -> Result<(), Error> {
+        self.memory.write_block32(address, data)
     }
 }
 

@@ -9,10 +9,12 @@ pub trait MemoryInterface {
     fn try_read8(&mut self, address: u32) -> Result<u8, Self::Error>;
     fn try_read16(&mut self, address: u32) -> Result<u16, Self::Error>;
     fn try_read32(&mut self, address: u32) -> Result<u32, Self::Error>;
+    fn try_read_block32(&mut self, address: u32, data: &mut [u32]) -> Result<(), Self::Error>;
 
     fn try_write8(&mut self, address: u32, value: u8) -> Result<(), Self::Error>;
     fn try_write16(&mut self, address: u32, value: u16) -> Result<(), Self::Error>;
     fn try_write32(&mut self, address: u32, value: u32) -> Result<(), Self::Error>;
+    fn try_write_block32(&mut self, address: u32, data: &[u32]) -> Result<(), Self::Error>;
 }
 
 pub trait ImplementInfallible {}
@@ -21,10 +23,12 @@ pub trait InfallibleMemoryInterface {
     fn read8(&mut self, address: u32) -> u8;
     fn read16(&mut self, address: u32) -> u16;
     fn read32(&mut self, address: u32) -> u32;
+    fn read_block32(&mut self, address: u32, data: &mut [u32]);
 
     fn write8(&mut self, address: u32, value: u8);
     fn write16(&mut self, address: u32, value: u16);
     fn write32(&mut self, address: u32, value: u32);
+    fn write_block32(&mut self, address: u32, data: &[u32]);
 }
 
 impl<E, T> InfallibleMemoryInterface for T
@@ -42,6 +46,10 @@ where E: Debug, T: MemoryInterface<Error=E> + ImplementInfallible
         self.try_read32(address).unwrap()
     }
 
+    fn read_block32(&mut self, address: u32, data: &mut [u32]) {
+        self.try_read_block32(address, data).unwrap();
+    }
+
     fn write8(&mut self, address: u32, value: u8) {
         self.try_write8(address, value).unwrap()
     }
@@ -52,6 +60,10 @@ where E: Debug, T: MemoryInterface<Error=E> + ImplementInfallible
 
     fn write32(&mut self, address: u32, value: u32) {
         self.try_write32(address, value).unwrap()
+    }
+
+    fn write_block32(&mut self, address: u32, data: &[u32]) {
+        self.try_write_block32(address, data).unwrap();
     }
 }
 
