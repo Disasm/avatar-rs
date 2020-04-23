@@ -1,0 +1,16 @@
+[package]
+name = "examples-nucleo-f042k6"
+version = "0.1.0"
+authors = ["Vadim Kaushan <admin@disasm.info>"]
+edition = "2018"
+
+[dependencies]
+avatar-probe-rs = { path = "../avatar-probe-rs" }
+avatar-common = { path = "../avatar-common", features = ["std"] }
+
+[dev-dependencies]
+cortex-m = "0.6.2"
+stm32f0xx-hal = { version = "0.16.0", features = ["stm32f042"] }
+vcell = "0.1.2"
+bme280 = "0.2.1"
+linux-embedded-hal = "0.3.0"

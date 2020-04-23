@@ -6,6 +6,7 @@ members = [
     "avatar-stm32f103c8",
     "avatar-usb",
     "cortex-m",
+    "examples-nucleo-f042k6",
     "stm32f0xx-hal",
     "vcell",
 ]
