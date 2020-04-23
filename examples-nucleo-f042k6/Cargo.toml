@@ -7,10 +7,8 @@ edition = "2018"
 [dependencies]
 avatar-probe-rs = { path = "../avatar-probe-rs" }
 avatar-common = { path = "../avatar-common", features = ["std"] }
-
-[dev-dependencies]
+vcell = "0.1.2"
 cortex-m = "0.6.2"
 stm32f0xx-hal = { version = "0.16.0", features = ["stm32f042"] }
-vcell = "0.1.2"
 bme280 = "0.2.1"
 linux-embedded-hal = "0.3.0"
