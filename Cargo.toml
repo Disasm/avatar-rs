@@ -5,10 +5,12 @@ members = [
     "avatar-probe-rs",
     "avatar-stm32f103c8",
     "avatar-usb",
+    "cortex-m",
     "stm32f0xx-hal",
     "vcell",
 ]
 
 [patch.crates-io]
 vcell = { path = "vcell" }
+cortex-m = { path = "cortex-m" }
 stm32f0xx-hal = { path = "stm32f0xx-hal" }

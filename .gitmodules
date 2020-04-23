@@ -6,3 +6,7 @@
 	path = stm32f0xx-hal
 	url = https://github.com/Disasm/stm32f0xx-hal.git
 	branch = avatar
+[submodule "cortex-m"]
+	path = cortex-m
+	url = https://github.com/Disasm/cortex-m.git
+	branch = avatar
