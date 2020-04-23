@@ -15,14 +15,14 @@ Connect your NUCLEO-F042K6 with a USB cable.
 
 Run the `blinky` example:
 
-    cd avatar-cli
+    cd examples-nucleo-f042k6
     cargo run --example blinky
 
 See also [`serial_hello`] and [`i2c_bme280`] examples.
 
 [NUCLEO-F042K6]: https://www.st.com/en/evaluation-tools/nucleo-f042k6.html
-[`serial_hello`]: https://github.com/Disasm/avatar-rs/blob/master/avatar-cli/examples/serial_hello.rs
-[`i2c_bme280`]: https://github.com/Disasm/avatar-rs/blob/master/avatar-cli/examples/i2c_bme280.rs
+[`serial_hello`]: https://github.com/Disasm/avatar-rs/blob/master/examples-nucleo-f042k6/examples/serial_hello.rs
+[`i2c_bme280`]: https://github.com/Disasm/avatar-rs/blob/master/examples-nucleo-f042k6/examples/i2c_bme280.rs
 
 
 ## Porting to the different families
