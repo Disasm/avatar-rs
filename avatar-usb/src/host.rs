@@ -22,14 +22,13 @@ impl AvatarDevice<'_> {
 
             let handle = device.open()?;
 
-            let langs = handle.read_languages(TIMEOUT)?;
-            if langs.len() == 0 || langs[0].lang_id() != EN_US {
+            let languages = handle.read_languages(TIMEOUT)?;
+            if languages.len() == 0 || languages[0].lang_id() != EN_US {
                 continue;
             }
 
-            let prod = handle.read_product_string(langs[0], &device_descriptor, TIMEOUT)?;
-
-            if prod == class::PRODUCT {
+            let product = handle.read_product_string(languages[0], &device_descriptor, TIMEOUT)?;
+            if product == class::PRODUCT {
                 return Ok(AvatarDevice {
                     handle,
                 });
