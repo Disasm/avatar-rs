@@ -5,6 +5,7 @@
 //   D5 - SCL
 
 use avatar_probe_rs::open_probe;
+use cortex_m::interrupt;
 use stm32f0xx_hal::prelude::*;
 use stm32f0xx_hal::stm32;
 use stm32f0xx_hal::i2c::I2c;
@@ -13,24 +14,12 @@ use std::thread;
 use bme280::BME280;
 use linux_embedded_hal::Delay;
 
-mod interrupt {
-    use cortex_m::interrupt::CriticalSection;
-
-    pub fn free<F, R>(f: F) -> R
-        where
-            F: FnOnce(&CriticalSection) -> R,
-    {
-        let cs: CriticalSection = unsafe { std::mem::zeroed() };
-
-        f(&cs)
-    }
-}
 
 fn main() {
     let interface = open_probe();
     vcell::set_memory_interface(interface);
 
-    let mut p = unsafe { stm32::Peripherals::steal() };
+    let mut p = stm32::Peripherals::take().unwrap();
 
     interrupt::free(|cs| {
         let mut rcc = p.RCC.configure().freeze(&mut p.FLASH);
