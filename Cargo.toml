@@ -6,6 +6,7 @@ members = [
     "avatar-stm32f103c8",
     "avatar-usb",
     "cortex-m",
+    "examples-blue-pill",
     "examples-dwm1001-dev",
     "examples-nucleo-f042k6",
     "stm32f0xx-hal",

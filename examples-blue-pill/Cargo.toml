@@ -1,0 +1,12 @@
+[package]
+name = "examples-blue-pill"
+version = "0.1.0"
+authors = ["Vadim Kaushan <admin@disasm.info>"]
+edition = "2018"
+
+[dependencies]
+avatar-probe-rs = { path = "../avatar-probe-rs" }
+vcell = "0.1.2"
+cortex-m = "0.6.2"
+stm32f1xx-hal = { version = "0.5.3", features = ["stm32f103"] }
+embedded-hal = "0.2.3"
