@@ -15,7 +15,7 @@ fn main() {
     let interface = open_probe();
     vcell::set_memory_interface(interface);
 
-    let p = unsafe { pac::Peripherals::steal() };
+    let p = pac::Peripherals::take().unwrap();
     let port0 = p.P0.split();
 
     let mut led1: P0_30<gpio::Output<PushPull>> = port0.p0_30.into_push_pull_output(Level::High);
