@@ -5,5 +5,5 @@ authors = ["Vadim Kaushan <admin@disasm.info>"]
 edition = "2018"
 
 [dependencies]
-probe-rs = "0.6.0"
+probe-rs = "0.10.1"
 avatar-common = { path = "../avatar-common", features = ["std"] }
