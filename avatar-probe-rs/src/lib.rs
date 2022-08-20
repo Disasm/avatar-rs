@@ -21,7 +21,7 @@ impl AvatarProbe {
     }
 
     pub fn open(probe: Probe) -> Result<Self, Error> {
-        let mut session = Box::new(probe.attach("stm32f401")?);
+        let session = Box::new(probe.attach("stm32f401")?);
 
         // This hack is required to store both probe-rs session and
         // Core which borrows the session.
@@ -99,7 +99,7 @@ impl ImplementInfallible for AvatarProbe {}
 pub fn open_probe() -> &'static mut StaticMemoryInterface {
     static TAKEN: AtomicBool = AtomicBool::new(false);
 
-    if TAKEN.compare_and_swap(false, true, Ordering::SeqCst) {
+    if TAKEN.swap(true, Ordering::SeqCst) {
         panic!("Probe is already opened");
     }
 
